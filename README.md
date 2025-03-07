@@ -10,21 +10,6 @@ This project implements a Genetic Algorithm (GA) to optimize a given objective f
 - **Objective Function Optimization**: Finds the minimum value of a given function.
 - **Visualization**: Plots the function and traces the best solutions over iterations.
 
-## Installation
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/genetic-algorithm.git
-   cd genetic-algorithm
-   ```
-2. Install dependencies:
-   ```sh
-   pip install numpy matplotlib
-   ```
-3. Run the script:
-   ```sh
-   python genetic_algorithm.py
-   ```
-
 ## Usage
 1. Define an objective function to optimize.
 2. Initialize the `GeneticAlgorithm` class with parameters such as chromosome length, population size, and mutation rate.
