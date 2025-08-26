@@ -2,9 +2,9 @@
 
 This project implements a **Genetic Algorithm (GA)** to optimize a test function of two variables:
 
-\[
-f(x, y) = 1.5 - e^{-(x^2 + y^2)} - 0.5 \cdot e^{-((x-1)^2 + (y+2)^2)}
-\]
+\begin{equation}
+f(x) = 1.5-\exp \left\{-x_1^2-x_2^2\right\}-0.5 \exp \left\{-\left(x_1-1\right)^2-\left(x_2+2\right)^2\right\}
+\end{equation}
 
 It allows experimentation with different GA parameters and visualizes both the search process and the final solutions.
 
