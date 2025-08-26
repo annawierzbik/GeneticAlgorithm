@@ -1,57 +1,84 @@
-# Genetic Algorithm for Function Optimization
+# Genetic Algorithm Optimization Project
 
-## Overview
-This project implements a Genetic Algorithm (GA) to optimize a given objective function. The algorithm encodes potential solutions as binary chromosomes, applies selection, crossover, and mutation operators, and evolves a population to minimize the function.
+This project implements a **Genetic Algorithm (GA)** to optimize a test function of two variables:
 
-## Features
-- **Binary Encoding**: Represents solutions as binary strings.
-- **Tournament Selection**: Selects the best candidates for reproduction.
-- **Crossover & Mutation**: Produces new solutions by combining parent chromosomes and applying mutations.
-- **Objective Function Optimization**: Finds the minimum value of a given function.
-- **Visualization**: Plots the function and traces the best solutions over iterations.
+\[
+f(x, y) = 1.5 - e^{-(x^2 + y^2)} - 0.5 \cdot e^{-((x-1)^2 + (y+2)^2)}
+\]
 
-## Usage
-1. Define an objective function to optimize.
-2. Initialize the `GeneticAlgorithm` class with parameters such as chromosome length, population size, and mutation rate.
-3. Run the algorithm and observe the best solution found.
-
-### Example
-```python
-# Define an objective function
-def sample_objective_function(x1, x2):
-    return 1.5 - np.exp(-x1**2 - x2**2) - 0.5 * np.exp(-(x1 - 1)**2 - (x2 + 2)**2)
-
-# Create and run the Genetic Algorithm
-ga = GeneticAlgorithm(chromosome_length=20,
-                      obj_func_num_args=2,
-                      objective_function=sample_objective_function,
-                      aoi=[-3, 3],
-                      population_size=500,
-                      tournament_size=2)
-
-best_solution, best_value, trace, best_args = ga.run()
-print("Best solution:", best_solution.array)
-print("Decoded best solution (x,y):", best_args)
-print("Value of the best solution:", best_value)
-```
-
-## Parameters
-- `chromosome_length`: Number of bits in each chromosome.
-- `obj_func_num_args`: Number of arguments for the objective function.
-- `objective_function`: The function to optimize.
-- `aoi`: The range of values for decoding the chromosome.
-- `population_size`: Number of individuals in the population.
-- `tournament_size`: Number of chromosomes competing in selection.
-- `mutation_probability`: Probability of mutation per chromosome.
-- `crossover_probability`: Probability of crossover occurring.
-- `num_steps`: Number of generations to evolve.
-
-## Output
-- **Best Solution**: The binary chromosome with the lowest function value.
-- **Decoded Best Solution**: The numerical representation of the best chromosome.
-- **Best Value**: The function value of the best solution.
-- **Visualization**: A contour plot showing the function and evolution trace.
+It allows experimentation with different GA parameters and visualizes both the search process and the final solutions.
 
 ---
-Made by Anna Wierzbik
 
+## 🧬 Features
+
+- Chromosome encoding as **bit strings**
+- **Crossover** (one-point) and **mutation**
+- **Tournament selection** for choosing parents
+- Configurable GA parameters:
+  - Chromosome length
+  - Population size
+  - Tournament size
+  - Mutation probability
+  - Crossover probability
+  - Number of generations
+- Function plotting with **GA search trace**
+- Visualization of **best found solutions** on contour plots
+- Comparison of multiple GA runs on a single plot
+
+---
+
+## ⚙️ How It Works
+
+1. **Initialization**: Random population of chromosomes is generated.
+2. **Decoding**: Each chromosome is decoded to real values in the search space.
+3. **Evaluation**: Objective function is calculated for each individual.
+4. **Selection**: Tournament selection chooses parents for reproduction.
+5. **Crossover & Mutation**: Parents produce offspring using crossover and mutation.
+6. **Replacement**: Offspring replace the old population.
+7. **Iteration**: Steps 2–6 are repeated for a defined number of generations.
+8. **Visualization**: Trace of the GA and final solutions are plotted on a contour plot.
+
+---
+
+## 🧪 Experiments
+
+The notebook contains experiments that show how GA parameters affect the results:
+
+1. **Chromosome length** – affects precision and search space size
+2. **Population size** – affects diversity and convergence speed
+3. **Tournament size** – affects selection pressure
+4. **Mutation probability** – affects exploration vs. exploitation
+5. **Crossover probability** – affects genetic recombination
+6. **Number of generations** – affects convergence and refinement
+
+For each experiment, the GA is run multiple times with different values, results are printed, and the **final best solutions** are plotted for comparison.
+
+---
+
+## 📊 Visualization
+
+- **Search trace**: shows the path of GA through the search space.
+- **Best solution marker**: the final best solution is highlighted on the contour plot.
+- **Comparison plots**: final solutions from multiple runs can be displayed on one plot for easy comparison.
+
+---
+
+## 📌 Example Usage
+
+```python
+# Run GA with specific parameters
+best_solution, best_value, trace, best_args = GeneticAlgorithm(
+    chromosome_length=20,
+    obj_func_num_args=2,
+    objective_function=sample_objective_function,
+    aoi=[-3, 3],
+    population_size=200,
+    tournament_size=2,
+    mutation_probability=0.05,
+    crossover_probability=0.8,
+    num_steps=50
+).run()
+
+print("Best decoded solution (x,y):", best_args)
+print("Value:", best_value)
